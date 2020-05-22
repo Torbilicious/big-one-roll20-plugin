@@ -20,7 +20,6 @@ const config = { attributes: false, childList: true, subtree: true };
 
 // Callback function to execute when mutations are observed
 const callback = function(mutationsList, observer) {
-    // Use traditional 'for loops' for IE 11
     for(let mutation of mutationsList) {
         if (mutation.type !== 'childList') {
             continue;
