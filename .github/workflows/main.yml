@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run a one-line script
+      run: echo Hello, world!
+
+    - name: Run a multi-line script
+      run: zip big-one.zip main.js manifest.json
+        
+    - name: Release
+      uses: fnkr/github-action-ghr@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        GHR_PATH: big-one.zip
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
